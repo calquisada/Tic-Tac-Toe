@@ -1,4 +1,6 @@
-export default function Log({turns}): any
+import React from "react";
+
+export default function Log({turns}: any): React.JSX.Element
 {
     return (
         <ol id="log"> 

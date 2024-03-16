@@ -1,11 +1,12 @@
+import React from 'react'
 import { useState } from 'react'
 
-export default function Player({ initialName, symbol, isActive, onChangeName }): any {
+export default function Player({ initialName, symbol, isActive, onChangeName }: any): React.JSX.Element {
 
     const [isEditing, setIsEditing]: any = useState(false)
     const [playerName, setPlayerName]: any = useState(initialName)
 
-    function handleEditClick() {
+    function handleEditClick(): any {
         setIsEditing((editing: any) => !editing)
 
         if (isEditing) {

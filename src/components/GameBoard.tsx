@@ -1,6 +1,7 @@
+import React from "react";
 
 
-export default function GameBoard({ onSelectSquare, board } ): any {
+export default function GameBoard({ onSelectSquare, board }: any ): React.JSX.Element {
 
     // const [gameBoard, setGameBoard] = useState(initialGameBoard)
 
@@ -16,8 +17,8 @@ export default function GameBoard({ onSelectSquare, board } ): any {
     // }
     return (
         <ol id="game-board">
-            {board.map((row: any, rowIndex: any) => (<li key={rowIndex}>
-                <ol> {row.map((playerSymbol: any, colIndex: any) => <li key={colIndex}><button onClick={ () => onSelectSquare(rowIndex, colIndex)} disabled={ playerSymbol!== null }> {playerSymbol}</button></li>)} </ol>
+            {board.map((row: any, rowIndex: number) => (<li key={rowIndex}>
+                <ol> {row.map((playerSymbol: string, colIndex: number) => <li key={colIndex}><button onClick={ () => onSelectSquare(rowIndex, colIndex)} disabled={ playerSymbol!== null }> {playerSymbol}</button></li>)} </ol>
             </li>)
             )}
         </ol>

@@ -38,7 +38,7 @@ function deriveWinner(gameBoard, players) {
     return winner;
 }
 function deriveGameBoard(gameTurns) {
-    let gameBoard = [...INITIAL_GAME_BOARD.map(array => [...array])];
+    let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
     for (const turn of gameTurns) {
         const { square, player } = turn;
         const { row, col } = square;
@@ -56,7 +56,7 @@ function App() {
     const hasDraw = gameTurns.length === 9 && !winner;
     function handleSelectSquare(rowIndex, colIndex) {
         // setActivePlayer((currentPlayer) => curActivePlayer === 'X' ? 'O' : 'X')
-        setGameTurns(prevTurns => {
+        setGameTurns((prevTurns) => {
             let currentPlayer = deriveActivePlayer(prevTurns);
             const updatedTurns = [{ square: { row: rowIndex, col: colIndex }, player: activePlayer }, ...prevTurns];
             return updatedTurns;
@@ -66,7 +66,7 @@ function App() {
         setGameTurns([]);
     }
     function handlePlayerNameChange(symbol, newName) {
-        setPlayers(prevPlayers => { return Object.assign(Object.assign({}, prevPlayers), { [symbol]: newName }); });
+        setPlayers((prevPlayers) => { return Object.assign(Object.assign({}, prevPlayers), { [symbol]: newName }); });
     }
     return (<main>
       <div id='game-container'>

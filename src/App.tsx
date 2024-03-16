@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import React from "react";
 
 import Player from "./components/Player"
 import GameBoard from "./components/GameBoard"
@@ -10,26 +11,26 @@ const PLAYERS: any = {
   X: 'Player 1', 
   O: 'Player 2'
 }
-const INITIAL_GAME_BOARD = [
+const INITIAL_GAME_BOARD: any = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ]
 
-function deriveActivePlayer(gameTurns: any) {
-  let currentPlayer: any = 'X';
+function deriveActivePlayer(gameTurns: any): any {
+  let currentPlayer: string = 'X';
   if (gameTurns.length > 0 && gameTurns[0].player === 'X') {
     currentPlayer = 'O';
   }
   return currentPlayer
 }
 
-function deriveWinner(gameBoard: any, players: any){
+function deriveWinner(gameBoard: any, players: any): any{
   let winner: any;
   for(const combination of WINNING_COMBINATIONS){
-    const firstSquareSymbole: any = gameBoard[combination[0].row][combination[0].column];
-    const secondSquareSymbole: any = gameBoard[combination[1].row][combination[1].column];
-    const thirdSquareSymbole: any = gameBoard[combination[2].row][combination[2].column];
+    const firstSquareSymbole: string = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbole: string = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbole: string = gameBoard[combination[2].row][combination[2].column];
 
     if(firstSquareSymbole && firstSquareSymbole === secondSquareSymbole && secondSquareSymbole === thirdSquareSymbole)
     {
@@ -39,9 +40,9 @@ function deriveWinner(gameBoard: any, players: any){
   return winner
 }
 
-function deriveGameBoard(gameTurns: any)
+function deriveGameBoard(gameTurns: any): any
 {
-  let gameBoard: any = [...INITIAL_GAME_BOARD.map(array => [...array])];
+  let gameBoard: any = [...INITIAL_GAME_BOARD.map((array: any) => [...array])];
 
   for(const turn of gameTurns) {
       const{ square, player }: any = turn
@@ -51,33 +52,33 @@ function deriveGameBoard(gameTurns: any)
   return gameBoard;
 }
 
-function App() {
+function App(): React.JSX.Element {
   // const [activePlayer, setActivePlayer] = useState('X')
   const  [players, setPlayers]: any = useState(PLAYERS);
   const [gameTurns, setGameTurns]: any = useState([])
 
-  const activePlayer: any = deriveActivePlayer(gameTurns);
-  const gameBoard: any = deriveGameBoard(gameTurns)
-  const winner: any = deriveWinner(gameBoard, players)
+  const activePlayer: string = deriveActivePlayer(gameTurns);
+  const gameBoard: string = deriveGameBoard(gameTurns)
+  const winner: string = deriveWinner(gameBoard, players)
   const hasDraw: any = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex: any, colIndex: any): any {
     // setActivePlayer((currentPlayer) => curActivePlayer === 'X' ? 'O' : 'X')
-    setGameTurns(prevTurns => {
-      let currentPlayer: any = deriveActivePlayer(prevTurns);
+    setGameTurns((prevTurns: any) => {
+      let currentPlayer: string = deriveActivePlayer(prevTurns);
 
       const updatedTurns: any = [{ square: { row: rowIndex, col: colIndex }, player: activePlayer }, ...prevTurns]
       return updatedTurns;
     })
   }
 
-  function handleRestart()
+  function handleRestart(): any
   {
     setGameTurns([]);
   }
 
-  function handlePlayerNameChange (symbol: any, newName: any): any {
-    setPlayers(prevPlayers => {return { ...prevPlayers, [symbol]: newName}; });
+  function handlePlayerNameChange (symbol: string, newName: string): any {
+    setPlayers((prevPlayers: any) => {return { ...prevPlayers, [symbol]: newName}; });
   }
 
   return (
